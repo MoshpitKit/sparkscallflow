@@ -3939,6 +3939,11 @@ code {
         <span class="tab-label">Guardrails</span>
         <span class="tab-label-short">Guard</span>
       </button>
+      <button class="nav-tab" data-section="giftcards">
+        <span class="tab-icon">🎁</span>
+        <span class="tab-label">Gift Cards</span>
+        <span class="tab-label-short">Gift</span>
+      </button>
       <div class="nav-divider"></div>
       <button class="nav-tab" data-section="verbatim">
         <span class="tab-icon">📜</span>
@@ -3991,6 +3996,7 @@ code {
         <div class="sidebar-group">
           <h4>Conversion</h4>
           <a href="#" data-section="guardrails" class="sidebar-link">🚧 Conversion Guardrails</a>
+          <a href="#" data-section="giftcards" class="sidebar-link">🎁 Gift Cards</a>
         </div>
         <div class="sidebar-group">
           <h4>Reference</h4>
@@ -4005,6 +4011,7 @@ code {
           <a href="#" data-section="ref-membership-costs" class="sidebar-link">📋 FC Membership Costs</a>
           <a href="#" data-section="ref-time-recommendation" class="sidebar-link">⏱️ Time Recommendation</a>
           <a href="#" data-section="ref-standard-cleaning" class="sidebar-link">🧹 Standard Cleaning</a>
+          <a href="#" data-section="ref-gift-cards" class="sidebar-link">🎁 Gift Card Booking</a>
         </div>
         <div class="sidebar-group">
           <h4>Process Updates</h4>
@@ -4306,8 +4313,7 @@ const PHASES_DATA = {
           <p>"Perfect. Any areas you want us to focus on?"</p>
         </div>`,
         proceedTo: [
-          { label: 'Regular DHJ Flow', target: 'phase4' },
-          { label: 'Proceed to DHJ Sales Pitch', target: 'phase5-dhj59-p1' },
+          { label: 'Proceed to Elevator Pitch', target: 'phase4' },
           { label: 'Data needs updating → Data Gathering', target: 'phase2' }
         ]
       },
@@ -4349,8 +4355,7 @@ const PHASES_DATA = {
           <p>"I see you need a cleaning at <span class="var">[Address]</span> - <span class="var">[X]</span> bed, <span class="var">[X]</span> bath. For a <span class="var">[X]</span>-hour cleaning, that\'d be <span class="var">[$X]</span>. When works best for you?"</p>
         </div>`,
         proceedTo: [
-          { label: 'Regular DHJ Flow', target: 'phase4' },
-          { label: 'Proceed to DHJ Sales Pitch', target: 'phase5-dhj59-p1' },
+          { label: 'Proceed to Elevator Pitch', target: 'phase4' },
           { label: 'Proceed to Booking', target: 'phase6' }
         ]
       },
@@ -4435,8 +4440,7 @@ const PHASES_DATA = {
           <p>"So I see you\'re looking for a cleaning at <span class="var">[Address]</span> - <span class="var">[X]</span> bed, <span class="var">[X]</span> bath. Sound right?"</p>
         </div>`,
         proceedTo: [
-          { label: 'Regular DHJ Flow', target: 'phase4' },
-          { label: 'Explicit OTC Flow', target: 'phase5-otc-p1' },
+          { label: 'Proceed to Elevator Pitch', target: 'phase4' },
           { label: 'Data needs updating → Data Gathering', target: 'phase2' }
         ]
       },
@@ -4480,7 +4484,7 @@ const PHASES_DATA = {
         </div>`,
         proceedTo: [
           { label: 'Proceed to Discovery Questions', target: 'phase3' },
-          { label: 'Regular DHJ Flow', target: 'phase4' }
+          { label: 'Proceed to Elevator Pitch', target: 'phase4' }
         ]
       },
       // --- INBOUND: DIRECT MAIL ---
@@ -4515,7 +4519,7 @@ const PHASES_DATA = {
         <div class="note-box"><strong>If they really can't talk:</strong> Schedule the callback yourself. Don't ask when works better - just tell them: <em>"No worries! I'll give you a call back tomorrow around the same time."</em></div>`,
         proceedTo: [
           { label: 'Proceed to Discovery Questions', target: 'phase3' },
-          { label: 'Regular DHJ Flow', target: 'phase4' }
+          { label: 'Proceed to Elevator Pitch', target: 'phase4' }
         ]
       },
       // --- OUTBOUND: ANGI ---
@@ -4548,8 +4552,7 @@ const PHASES_DATA = {
           <p>"I see you need a cleaning at <span class="var">[Address]</span> - <span class="var">[X]</span> bed, <span class="var">[X]</span> bath. For a <span class="var">[X]</span>-hour cleaning, that'd be <span class="var">[$X]</span>. When works for you?"</p>
         </div>`,
         proceedTo: [
-          { label: 'Regular DHJ Flow', target: 'phase4' },
-          { label: 'Explicit OTC Flow', target: 'phase5-otc-p1' },
+          { label: 'Proceed to Elevator Pitch', target: 'phase4' },
           { label: 'Proceed to Booking', target: 'phase6' }
         ]
       }
@@ -4630,7 +4633,7 @@ const PHASES_DATA = {
         </div>`,
         proceedTo: [
           { label: 'Proceed to Level 2', target: 'phase3-level2' },
-          { label: 'Regular DHJ Flow', target: 'phase4' }
+          { label: 'Proceed to Elevator Pitch', target: 'phase4' }
         ]
       },
       level2: {
@@ -4657,7 +4660,7 @@ const PHASES_DATA = {
         </div>`,
         proceedTo: [
           { label: 'Proceed to Level 3', target: 'phase3-level3' },
-          { label: 'Regular DHJ Flow', target: 'phase4' }
+          { label: 'Proceed to Elevator Pitch', target: 'phase4' }
         ]
       },
       level3: {
@@ -4684,7 +4687,7 @@ const PHASES_DATA = {
         </div>`,
         proceedTo: [
           { label: 'Proceed to Level 4', target: 'phase3-level4' },
-          { label: 'Regular DHJ Flow', target: 'phase4' }
+          { label: 'Proceed to Elevator Pitch', target: 'phase4' }
         ]
       },
       level4: {
@@ -4711,7 +4714,7 @@ const PHASES_DATA = {
         </div>`,
         proceedTo: [
           { label: 'Proceed to Level 5', target: 'phase3-level5' },
-          { label: 'Regular DHJ Flow', target: 'phase4' }
+          { label: 'Proceed to Elevator Pitch', target: 'phase4' }
         ]
       },
       level5: {
@@ -4737,7 +4740,7 @@ const PHASES_DATA = {
           </div>
         </div>`,
         proceedTo: [
-          { label: 'Regular DHJ Flow', target: 'phase4' }
+          { label: 'Proceed to Elevator Pitch', target: 'phase4' }
         ]
       }
     }
@@ -4775,7 +4778,10 @@ const PHASES_DATA = {
         </div>
       </div>
     </div>`,
-    proceedTo: [{ label: 'Proceed to Sales Pitch', target: 'phase5' }]
+    proceedTo: [
+      { label: 'Regular DHJ Flow', target: 'phase5-dhj59-p1' },
+      { label: 'Explicit OTC Flow', target: 'phase5-otc-p1' }
+    ]
   },
 
   // ============================================================
@@ -5418,6 +5424,80 @@ const GUARDRAILS_DATA = {
     </div>
   `
 };
+
+// ============================================================
+// GIFT CARDS
+// ============================================================
+const GIFTCARDS_DATA = {
+  title: 'Homeaglow Gift Cards',
+  icon: '🎁',
+  description: 'Everything you need to know about selling gift cards.',
+  content: `
+    <div class="alert-box danger" style="margin-bottom:16px;">
+      <strong>Customer-Initiated Only.</strong> Only offer gift cards when <strong>the customer brings it up first</strong>. Do not proactively pitch them.<br><br>
+      <strong>IMPORTANT:</strong> If an agent proactively offers the Gift Card, the sale will automatically be tagged as Invalid.
+    </div>
+
+    <h4 style="margin-top:20px;">What You Need to Know</h4>
+
+    <div class="info-box" style="margin-top:12px;">
+      <strong>Counts Toward Your CVR.</strong> Gift card sales count toward your conversion rate, as long as the sale is <strong>strictly QA-ed</strong>.
+    </div>
+
+    <h4 style="margin-top:24px;">What Qualifies as a Gift Card</h4>
+    <p style="margin-top:8px;font-size:14px;">A gift card sale is <strong>only</strong> when the customer explicitly asks to purchase one of the three fixed options below. These are one-time cleaning vouchers at discounted rates, not subscriptions or regular OTC sales.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;">
+      <div style="text-align:center;padding:20px 12px;border:2px solid var(--border-color);border-radius:var(--radius);background:#fff;">
+        <div style="font-size:12px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px;">2 Hours</div>
+        <div style="font-size:32px;font-weight:800;color:var(--purple-dark);margin:8px 0;">$79</div>
+        <div style="font-size:12px;color:var(--text-secondary);">vs. $126 regular OTC</div>
+      </div>
+      <div style="text-align:center;padding:20px 12px;border:2px solid var(--border-color);border-radius:var(--radius);background:#fff;">
+        <div style="font-size:12px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px;">3 Hours</div>
+        <div style="font-size:32px;font-weight:800;color:var(--purple-dark);margin:8px 0;">$119</div>
+        <div style="font-size:12px;color:var(--text-secondary);">vs. $189 regular OTC</div>
+      </div>
+      <div style="text-align:center;padding:20px 12px;border:2px solid var(--border-color);border-radius:var(--radius);background:#fff;">
+        <div style="font-size:12px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px;">4 Hours</div>
+        <div style="font-size:32px;font-weight:800;color:var(--purple-dark);margin:8px 0;">$159</div>
+        <div style="font-size:12px;color:var(--text-secondary);">vs. $252 regular OTC</div>
+      </div>
+    </div>
+
+    <div class="alert-box warning" style="margin-top:16px;">
+      <strong>Not a Gift Card:</strong> If a customer asks for a subscription or anything outside these three options, <strong>that is not a gift card sale</strong>. Only the fixed options above qualify.
+    </div>
+
+    <h4 style="margin-top:24px;">How to Process</h4>
+    <div class="info-box" style="margin-top:8px;">
+      <strong>Go to:</strong> <a href="https://www.homeaglow.com/hub/gift-cards" target="_blank" class="booking-link">homeaglow.com/hub/gift-cards</a>
+    </div>
+
+    <h4 style="margin-top:24px;">Sale Logging</h4>
+    <p style="margin-top:8px;font-size:14px;">When closing a sale, complete all required fields:</p>
+
+    <div style="margin-top:12px;background:#fff;border:1px solid var(--border-color);border-radius:var(--radius-sm);overflow:hidden;">
+      <div style="padding:10px 14px;border-bottom:1px solid var(--border-color);font-size:13px;">
+        <span style="color:var(--text-secondary);">&#9679;</span> I made a sale and it's a... (Sale Type)
+      </div>
+      <div style="padding:10px 14px;border-bottom:1px solid var(--border-color);font-size:13px;">
+        <span style="color:var(--text-secondary);">&#9679;</span> First Job Date
+      </div>
+      <div style="padding:10px 14px;border-bottom:1px solid var(--border-color);font-size:13px;">
+        <span style="color:var(--text-secondary);">&#9679;</span> Django C ID
+      </div>
+      <div style="padding:10px 14px;font-size:13px;background:#fef2f2;">
+        <span style="color:var(--pink);">&#9679;</span> <strong>Is this a Gift Card?</strong> &rarr; Yes / No <span style="background:var(--pink);color:#fff;font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;margin-left:6px;">NEW</span>
+      </div>
+    </div>
+
+    <div class="note-box" style="margin-top:16px;">
+      <strong>Questions?</strong> Raise them with your TL.
+    </div>
+  `
+};
+
 
 </script>
   <script>
@@ -6604,7 +6684,42 @@ const REFERENCE_DATA = {
           <strong>Cleaning Supplies:</strong> Cleaners generally bring their own equipment and supplies. If the customer would like their cleaner to use their own products, that's possible too - just let them know prior to the appointment.
         </div>
       </div>`
+    },
+    // ============================================================
+    // GIFT CARD BOOKING
+    // ============================================================
+    giftCardBooking: {
+      id: 'ref-gift-cards',
+      title: 'Gift Card Booking',
+      icon: '🎁',
+      content: `<div class="ref-block">
+        <h4>Gift Card Booking Link</h4>
+        <div class="info-box">
+          <strong>Process gift cards here:</strong><br>
+          <a href="https://www.homeaglow.com/hub/gift-cards" target="_blank" class="booking-link">homeaglow.com/hub/gift-cards</a>
+        </div>
+        <h4 style="margin-top:16px;">Gift Card Pricing</h4>
+        <table style="width:100%;border-collapse:collapse;margin-top:8px;">
+          <thead>
+            <tr style="background:var(--purple-dark);color:var(--text-light);">
+              <th style="padding:8px 12px;text-align:left;border:1px solid var(--border-color);">Hours</th>
+              <th style="padding:8px 12px;text-align:left;border:1px solid var(--border-color);">Gift Card Price</th>
+              <th style="padding:8px 12px;text-align:left;border:1px solid var(--border-color);">Regular OTC</th>
+              <th style="padding:8px 12px;text-align:left;border:1px solid var(--border-color);">Savings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">2 hours</td><td style="padding:8px 12px;border:1px solid var(--border-color);font-weight:700;">$79</td><td style="padding:8px 12px;border:1px solid var(--border-color);">$126</td><td style="padding:8px 12px;border:1px solid var(--border-color);color:var(--green-accent);font-weight:600;">$47 off</td></tr>
+            <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">3 hours</td><td style="padding:8px 12px;border:1px solid var(--border-color);font-weight:700;">$119</td><td style="padding:8px 12px;border:1px solid var(--border-color);">$189</td><td style="padding:8px 12px;border:1px solid var(--border-color);color:var(--green-accent);font-weight:600;">$70 off</td></tr>
+            <tr><td style="padding:8px 12px;border:1px solid var(--border-color);">4 hours</td><td style="padding:8px 12px;border:1px solid var(--border-color);font-weight:700;">$159</td><td style="padding:8px 12px;border:1px solid var(--border-color);">$252</td><td style="padding:8px 12px;border:1px solid var(--border-color);color:var(--green-accent);font-weight:600;">$93 off</td></tr>
+          </tbody>
+        </table>
+        <div class="alert-box warning" style="margin-top:12px;">
+          <strong>Customer-initiated only.</strong> Do not proactively pitch gift cards. If proactively offered, the sale is automatically tagged as Invalid.
+        </div>
+      </div>`
     }
+
   }
 };
 
@@ -6951,6 +7066,19 @@ const REFERENCE_DATA = {
       }
     }
 
+    // Check gift cards
+    if (id === 'giftcards') {
+      return {
+        mainSection: 'giftcards',
+        subSection: null,
+        navTab: 'giftcards',
+        data: GIFTCARDS_DATA,
+        subData: null,
+        hasSubNav: false,
+        type: 'giftcards'
+      };
+    }
+
     // Check guardrails
     if (id === 'guardrails') {
       return {
@@ -7137,6 +7265,9 @@ const REFERENCE_DATA = {
     switch (resolved.type) {
       case 'phase':
         renderPhase(resolved);
+        break;
+      case 'giftcards':
+        renderGiftCards(resolved);
         break;
       case 'guardrails':
         renderGuardrails(resolved);
@@ -7551,6 +7682,13 @@ const REFERENCE_DATA = {
       }
       document.body.appendChild(el);
     }
+  }
+
+  function renderGiftCards(resolved) {
+    const data = resolved.data;
+    setHeader(data.title, data.description);
+    cardBody.innerHTML = data.content;
+    addCopyButtons();
   }
 
   function renderGuardrails(resolved) {
@@ -8583,6 +8721,14 @@ const REFERENCE_DATA = {
       searchResults.classList.add('hidden');
       searchInput.blur();
     }
+  });
+
+  // Add gift cards to search index
+  searchIndex.push({
+    section: 'giftcards',
+    type: 'Gift Cards',
+    title: 'Homeaglow Gift Cards',
+    text: 'Gift card sale customer initiated only. 2 hours $79. 3 hours $119. 4 hours $159. Discounted OTC rates. Not subscriptions. homeaglow.com/hub/gift-cards. Sale logging. Is this a Gift Card field. Counts toward CVR.'
   });
 
   // Add guardrails to search index
