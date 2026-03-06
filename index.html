@@ -4453,7 +4453,8 @@ const PHASES_DATA = {
           <p>"So I see you\'re looking for a cleaning at <span class="var">[Address]</span> - <span class="var">[X]</span> bed, <span class="var">[X]</span> bath. Sound right?"</p>
         </div>`,
         proceedTo: [
-          { label: 'Proceed to Elevator Pitch', target: 'phase4' },
+          { label: 'Regular DHJ Flow', target: 'phase5-dhj59-p1' },
+          { label: 'Explicit OTC Flow', target: 'phase5-otc-p1' },
           { label: 'Data needs updating → Data Gathering', target: 'phase2' }
         ]
       },
@@ -4565,7 +4566,8 @@ const PHASES_DATA = {
           <p>"I see you need a cleaning at <span class="var">[Address]</span> - <span class="var">[X]</span> bed, <span class="var">[X]</span> bath. For a <span class="var">[X]</span>-hour cleaning, that'd be <span class="var">[$X]</span>. When works for you?"</p>
         </div>`,
         proceedTo: [
-          { label: 'Proceed to Elevator Pitch', target: 'phase4' },
+          { label: 'Regular DHJ Flow', target: 'phase5-dhj59-p1' },
+          { label: 'Explicit OTC Flow', target: 'phase5-otc-p1' },
           { label: 'Proceed to Discovery Questions', target: 'phase3' }
         ]
       }
