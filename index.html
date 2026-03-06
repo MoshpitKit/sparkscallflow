@@ -894,6 +894,23 @@ body { --fs-scale: 1; --content-zoom: 1; }
   transform: translateX(2px);
 }
 
+.proceed-btn.otc-path {
+  background: linear-gradient(135deg, #0d9488, #0f766e);
+  color: var(--text-light);
+  box-shadow: 0 2px 8px rgba(13, 148, 136, 0.3);
+  animation: otcPulse 2s ease-in-out infinite;
+}
+
+.proceed-btn.otc-path:hover {
+  box-shadow: 0 4px 16px rgba(13, 148, 136, 0.45);
+  transform: translateY(-1px);
+}
+
+@keyframes otcPulse {
+  0%, 100% { box-shadow: 0 2px 8px rgba(13, 148, 136, 0.3); }
+  50% { box-shadow: 0 4px 20px rgba(13, 148, 136, 0.5); }
+}
+
 /* --- SCRIPT BLOCKS --- */
 .script-block,
 .info-box,
@@ -3841,8 +3858,7 @@ code {
       <input type="email" id="login-email" placeholder="e.g. juan@homeaglow.com" autocomplete="email">
       <div class="login-error" id="login-error"></div>
       <button class="login-btn" id="login-btn" disabled>Continue</button>
-      <p style="font-size:10px;color:#888888;margin-top:14px;line-height:1.4;">Authorized domains: @homeaglow.com, @homeaglowsales.com, @homeaglowsalesone.com, @homeaglowsalestwo.com, @maximizeltv.com</p>
-    </div>
+      </div>
   </div>
 
   <!-- HEADER -->
@@ -8122,7 +8138,10 @@ const REFERENCE_DATA = {
 
     let html = '';
     buttons.forEach((btn, i) => {
-      const cls = i === 0 ? 'primary' : 'secondary';
+      let cls = i === 0 ? 'primary' : 'secondary';
+      if (btn.target === 'phase5-otc-p1' || btn.label.includes('OTC-First')) {
+        cls = 'otc-path';
+      }
       html += `<button class="proceed-btn ${cls}" data-target="${btn.target}">
         ${btn.label} <span class="arrow">→</span>
       </button>`;
