@@ -4306,7 +4306,7 @@ const PHASES_DATA = {
           <p>"Perfect. Any areas you want us to focus on?"</p>
         </div>`,
         proceedTo: [
-          { label: 'Proceed to Elevator Pitch (brief)', target: 'phase4' },
+          { label: 'Regular DHJ Flow', target: 'phase4' },
           { label: 'Proceed to DHJ Sales Pitch', target: 'phase5-dhj59-p1' },
           { label: 'Data needs updating → Data Gathering', target: 'phase2' }
         ]
@@ -4349,7 +4349,7 @@ const PHASES_DATA = {
           <p>"I see you need a cleaning at <span class="var">[Address]</span> - <span class="var">[X]</span> bed, <span class="var">[X]</span> bath. For a <span class="var">[X]</span>-hour cleaning, that\'d be <span class="var">[$X]</span>. When works best for you?"</p>
         </div>`,
         proceedTo: [
-          { label: 'Proceed to Elevator Pitch', target: 'phase4' },
+          { label: 'Regular DHJ Flow', target: 'phase4' },
           { label: 'Proceed to DHJ Sales Pitch', target: 'phase5-dhj59-p1' },
           { label: 'Proceed to Booking', target: 'phase6' }
         ]
@@ -4435,8 +4435,8 @@ const PHASES_DATA = {
           <p>"So I see you\'re looking for a cleaning at <span class="var">[Address]</span> - <span class="var">[X]</span> bed, <span class="var">[X]</span> bath. Sound right?"</p>
         </div>`,
         proceedTo: [
-          { label: 'Proceed to Elevator Pitch', target: 'phase4' },
-          { label: 'Proceed to OTC-First Flow (Step 2)', target: 'phase5-otc-p1' },
+          { label: 'Regular DHJ Flow', target: 'phase4' },
+          { label: 'Explicit OTC Flow', target: 'phase5-otc-p1' },
           { label: 'Data needs updating → Data Gathering', target: 'phase2' }
         ]
       },
@@ -4480,7 +4480,7 @@ const PHASES_DATA = {
         </div>`,
         proceedTo: [
           { label: 'Proceed to Discovery Questions', target: 'phase3' },
-          { label: 'Proceed to Elevator Pitch', target: 'phase4' }
+          { label: 'Regular DHJ Flow', target: 'phase4' }
         ]
       },
       // --- INBOUND: DIRECT MAIL ---
@@ -4515,7 +4515,7 @@ const PHASES_DATA = {
         <div class="note-box"><strong>If they really can't talk:</strong> Schedule the callback yourself. Don't ask when works better - just tell them: <em>"No worries! I'll give you a call back tomorrow around the same time."</em></div>`,
         proceedTo: [
           { label: 'Proceed to Discovery Questions', target: 'phase3' },
-          { label: 'Proceed to Elevator Pitch', target: 'phase4' }
+          { label: 'Regular DHJ Flow', target: 'phase4' }
         ]
       },
       // --- OUTBOUND: ANGI ---
@@ -4548,8 +4548,8 @@ const PHASES_DATA = {
           <p>"I see you need a cleaning at <span class="var">[Address]</span> - <span class="var">[X]</span> bed, <span class="var">[X]</span> bath. For a <span class="var">[X]</span>-hour cleaning, that'd be <span class="var">[$X]</span>. When works for you?"</p>
         </div>`,
         proceedTo: [
-          { label: 'Proceed to Elevator Pitch', target: 'phase4' },
-          { label: 'Proceed to OTC-First Flow (Step 2)', target: 'phase5-otc-p1' },
+          { label: 'Regular DHJ Flow', target: 'phase4' },
+          { label: 'Explicit OTC Flow', target: 'phase5-otc-p1' },
           { label: 'Proceed to Booking', target: 'phase6' }
         ]
       }
@@ -4630,7 +4630,7 @@ const PHASES_DATA = {
         </div>`,
         proceedTo: [
           { label: 'Proceed to Level 2', target: 'phase3-level2' },
-          { label: 'Proceed to Elevator Pitch', target: 'phase4' }
+          { label: 'Regular DHJ Flow', target: 'phase4' }
         ]
       },
       level2: {
@@ -4657,7 +4657,7 @@ const PHASES_DATA = {
         </div>`,
         proceedTo: [
           { label: 'Proceed to Level 3', target: 'phase3-level3' },
-          { label: 'Proceed to Elevator Pitch', target: 'phase4' }
+          { label: 'Regular DHJ Flow', target: 'phase4' }
         ]
       },
       level3: {
@@ -4684,7 +4684,7 @@ const PHASES_DATA = {
         </div>`,
         proceedTo: [
           { label: 'Proceed to Level 4', target: 'phase3-level4' },
-          { label: 'Proceed to Elevator Pitch', target: 'phase4' }
+          { label: 'Regular DHJ Flow', target: 'phase4' }
         ]
       },
       level4: {
@@ -4711,7 +4711,7 @@ const PHASES_DATA = {
         </div>`,
         proceedTo: [
           { label: 'Proceed to Level 5', target: 'phase3-level5' },
-          { label: 'Proceed to Elevator Pitch', target: 'phase4' }
+          { label: 'Regular DHJ Flow', target: 'phase4' }
         ]
       },
       level5: {
@@ -4737,7 +4737,7 @@ const PHASES_DATA = {
           </div>
         </div>`,
         proceedTo: [
-          { label: 'Proceed to Elevator Pitch', target: 'phase4' }
+          { label: 'Regular DHJ Flow', target: 'phase4' }
         ]
       }
     }
@@ -8139,7 +8139,7 @@ const REFERENCE_DATA = {
     let html = '';
     buttons.forEach((btn, i) => {
       let cls = i === 0 ? 'primary' : 'secondary';
-      if (btn.target === 'phase5-otc-p1' || btn.label.includes('OTC-First')) {
+      if (btn.target === 'phase5-otc-p1' || btn.label.includes('Explicit OTC')) {
         cls = 'otc-path';
       }
       html += `<button class="proceed-btn ${cls}" data-target="${btn.target}">
