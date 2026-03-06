@@ -4420,7 +4420,7 @@ const PHASES_DATA = {
         </div>`,
         proceedTo: [
           { label: 'Proceed to Elevator Pitch', target: 'phase4' },
-          { label: 'Proceed to DHJ Sales Pitch', target: 'phase5-dhj59-p1' },
+          { label: 'Proceed to OTC-First Flow (Step 2)', target: 'phase5-otc-p1' },
           { label: 'Data needs updating → Data Gathering', target: 'phase2' }
         ]
       },
@@ -4533,7 +4533,7 @@ const PHASES_DATA = {
         </div>`,
         proceedTo: [
           { label: 'Proceed to Elevator Pitch', target: 'phase4' },
-          { label: 'Proceed to DHJ Sales Pitch', target: 'phase5-dhj59-p1' },
+          { label: 'Proceed to OTC-First Flow (Step 2)', target: 'phase5-otc-p1' },
           { label: 'Proceed to Booking', target: 'phase6' }
         ]
       }
@@ -4774,6 +4774,50 @@ const PHASES_DATA = {
       { type: 'danger', text: 'LANGUAGE RULES: Always say "ForeverClean membership" (branded). Always say "monthly service fee" (explicit). Never say "commitment," "contract," "sign up," or "but." Use "arrangement" for term length. Transitions: "and" / "so" / "that said."' }
     ],
     subSections: {
+      // --- PATH SELECTOR ---
+      path_select: {
+        id: 'phase5-paths',
+        title: 'Sales Pitch Paths',
+        subtitle: 'Choose the correct path based on lead source',
+        tips: [
+          { type: 'danger', text: 'LANGUAGE RULES: Always say "ForeverClean membership" (branded). Always say "monthly service fee" (explicit). Never say "commitment," "contract," "sign up," or "but." Use "arrangement" for term length.' }
+        ],
+        content: `<div class="pitch-block">
+          <h4>Choose Your Sales Pitch Path</h4>
+          <div class="info-box" style="margin-bottom:16px;">
+            <strong>Select the correct path based on where the lead came from:</strong>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
+            <div style="background:linear-gradient(135deg,#1e293b,#334155);border-radius:12px;padding:20px;color:#fff;cursor:pointer;" onclick="navigateTo('phase5-dhj59-p1')">
+              <div style="font-size:24px;margin-bottom:8px;">🎯</div>
+              <h4 style="color:#fff;margin-bottom:6px;">Path A: DHJ-First</h4>
+              <p style="font-size:12px;color:rgba(255,255,255,0.78);margin-bottom:12px;">Lead with ForeverClean membership pitch directly.</p>
+              <div style="font-size:11px;color:rgba(255,255,255,0.6);">
+                🔵 LSA (Google)<br>
+                🟡 Yelp<br>
+                🟢 Bark<br>
+                📺 TV Ads / Direct Mail
+              </div>
+            </div>
+            <div style="background:linear-gradient(135deg,#0d9488,#0f766e);border-radius:12px;padding:20px;color:#fff;cursor:pointer;" onclick="navigateTo('phase5-otc-p1')">
+              <div style="font-size:24px;margin-bottom:8px;">🔄</div>
+              <h4 style="color:#fff;margin-bottom:6px;">Path B: OTC-First (Conversion)</h4>
+              <p style="font-size:12px;color:rgba(255,255,255,0.78);margin-bottom:12px;">Confirm OTC first, then steer toward ForeverClean.</p>
+              <div style="font-size:11px;color:rgba(255,255,255,0.6);">
+                🟠 Thumbtack<br>
+                🔴 Angi<br>
+                <br>
+                <em>Follows conversion scripting flow</em>
+              </div>
+            </div>
+          </div>
+        </div>`,
+        proceedTo: []
+      },
+      // ============================================================
+      // PATH A: DHJ-FIRST (LSA, Yelp, Bark, TV Ads, Direct Mail)
+      // ============================================================
       // --- DHJ $59MF $35/hr ETF (Part 1) ---
       dhj59_part1: {
         id: 'phase5-dhj59-p1',
@@ -4935,6 +4979,9 @@ const PHASES_DATA = {
           { label: 'Need to Negotiate', target: 'phase5-negotiate-p1' }
         ]
       },
+      // ============================================================
+      // PATH B: OTC-FIRST / CONVERSION SCRIPTING (Thumbtack, Angi)
+      // ============================================================
       // --- One-Time Cleaning (Part 1): Present OTC + Gauge Openness ---
       otc_part1: {
         id: 'phase5-otc-p1',
@@ -4991,6 +5038,9 @@ const PHASES_DATA = {
           { label: 'Customer says NO → Qualifying Question (Step 5)', target: 'phase5-qualify' }
         ]
       },
+      // ============================================================
+      // SHARED SECTIONS (Used by both paths)
+      // ============================================================
       // --- Step 5: Qualifying Question ---
       qualify: {
         id: 'phase5-qualify',
@@ -5022,28 +5072,6 @@ const PHASES_DATA = {
           { label: 'Cost / Length / Both → Negotiate (Step 6)', target: 'phase5-negotiate-p1' },
           { label: 'Don\'t need regular cleanings → Book OTC', target: 'phase5-otc-p3' },
           { label: 'Unrelated answer → Book OTC', target: 'phase5-otc-p3' }
-        ]
-      },
-      // --- One-Time Cleaning (Part 3): Finalize OTC ---
-      otc_part3: {
-        id: 'phase5-otc-p3',
-        title: 'OTC: Finalize Booking',
-        subtitle: 'Finalize OTC booking',
-        tips: [
-          { type: 'danger', text: 'QA Checklist: ✅ Presented OTC pricing ✅ Discussed ForeverClean membership savings ✅ Asked qualifying question ✅ Attempted negotiation. Missing any = INVALID sale.' },
-          { type: 'tip', text: 'Positive energy. A booked OTC is still revenue. Do NOT circle back to ForeverClean.' }
-        ],
-        content: `<div class="pitch-block">
-          <h4>Finalize OTC Booking</h4>
-          <div class="script-block">
-            <p>"Absolutely - let\'s get your one-time cleaning set up at <span class="var">$[X]</span>. Let me grab a few details from you..."</p>
-          </div>
-          <div class="info-box" style="margin-top:12px;">
-            [Proceed with standard OTC booking flow]
-          </div>
-        </div>`,
-        proceedTo: [
-          { label: 'Proceed to Booking', target: 'phase6' }
         ]
       },
       // --- Negotiate (Part 1) ---
@@ -5123,6 +5151,28 @@ const PHASES_DATA = {
           { label: 'Customer accepts → Booking', target: 'phase6' },
           { label: 'Customer declines Offer 2 → Book OTC', target: 'phase5-otc-p3' },
           { label: 'Customer has objections → Objections', target: 'objections' }
+        ]
+      },
+      // --- One-Time Cleaning (Part 3): Finalize OTC ---
+      otc_part3: {
+        id: 'phase5-otc-p3',
+        title: 'OTC: Finalize Booking',
+        subtitle: 'Finalize OTC booking',
+        tips: [
+          { type: 'danger', text: 'QA Checklist: ✅ Presented OTC pricing ✅ Discussed ForeverClean membership savings ✅ Asked qualifying question ✅ Attempted negotiation. Missing any = INVALID sale.' },
+          { type: 'tip', text: 'Positive energy. A booked OTC is still revenue. Do NOT circle back to ForeverClean.' }
+        ],
+        content: `<div class="pitch-block">
+          <h4>Finalize OTC Booking</h4>
+          <div class="script-block">
+            <p>"Absolutely - let\'s get your one-time cleaning set up at <span class="var">$[X]</span>. Let me grab a few details from you..."</p>
+          </div>
+          <div class="info-box" style="margin-top:12px;">
+            [Proceed with standard OTC booking flow]
+          </div>
+        </div>`,
+        proceedTo: [
+          { label: 'Proceed to Booking', target: 'phase6' }
         ]
       },
       // --- Trial Cleaning ---
