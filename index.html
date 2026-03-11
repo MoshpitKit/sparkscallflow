@@ -6838,6 +6838,15 @@ const REFERENCE_DATA = {
 
   loginNameInput.addEventListener('input', validateLoginInputs);
   loginEmailInput.addEventListener('input', validateLoginInputs);
+  loginNameInput.addEventListener('change', validateLoginInputs);
+  loginEmailInput.addEventListener('change', validateLoginInputs);
+  loginNameInput.addEventListener('keyup', validateLoginInputs);
+  loginEmailInput.addEventListener('keyup', validateLoginInputs);
+
+  // Handle browser autofill which doesn't fire input events
+  setTimeout(validateLoginInputs, 500);
+  setTimeout(validateLoginInputs, 1500);
+  setTimeout(validateLoginInputs, 3000);
 
   loginNameInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') loginEmailInput.focus();
