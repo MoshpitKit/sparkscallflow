@@ -1,4 +1,4 @@
-const CACHE_NAME = 'spark-v17';
+const CACHE_NAME = 'spark-v19';
 const URLS_TO_CACHE = ['./', './index.html'];
 
 self.addEventListener('install', event => {

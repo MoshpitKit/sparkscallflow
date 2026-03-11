@@ -2502,6 +2502,8 @@ code {
   font-size: 14px;
   color: rgba(255,255,255,0.9);
   animation: fadeIn 0.25s ease;
+  resize: both;
+  overflow: auto;
 }
 
 .lead-profile-float .lpf-title {
@@ -2513,7 +2515,7 @@ code {
   font-weight: 700;
   padding-bottom: 8px;
   border-bottom: 1px solid rgba(148,163,184,0.2);
-  cursor: pointer;
+  cursor: grab;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2612,6 +2614,19 @@ code {
   max-height: calc(100vh - var(--header-height) - var(--nav-height) - var(--breadcrumb-height) - var(--sub-nav-height) - 40px);
   overflow-y: auto;
   scrollbar-width: thin;
+  resize: both;
+}
+
+.tips-float .tf-title {
+  cursor: grab;
+  user-select: none;
+}
+.tips-float .tf-title:active {
+  cursor: grabbing;
+}
+.tips-float.dragging {
+  opacity: 0.92;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
 }
 
 /* When no sub-nav visible */
@@ -8772,6 +8787,74 @@ const REFERENCE_DATA = {
   });
 
   // --- INIT ---
+  window.navigateTo = navigateTo;
+
+  // --- DRAGGABLE FLOATING PANELS ---
+  function makeDraggable(panel, handleSelector) {
+    const handle = panel.querySelector(handleSelector);
+    if (!handle) return;
+    let isDragging = false, startX, startY, startLeft, startTop;
+
+    handle.addEventListener('mousedown', startDrag);
+    handle.addEventListener('touchstart', startDrag, { passive: false });
+
+    function startDrag(e) {
+      if (e.target.closest('.tf-toggle, .lpf-toggle')) return; // don't drag on collapse toggle
+      isDragging = true;
+      panel.classList.add('dragging');
+      const rect = panel.getBoundingClientRect();
+      // Convert to left/top positioning
+      panel.style.left = rect.left + 'px';
+      panel.style.top = rect.top + 'px';
+      panel.style.right = 'auto';
+      const point = e.touches ? e.touches[0] : e;
+      startX = point.clientX;
+      startY = point.clientY;
+      startLeft = rect.left;
+      startTop = rect.top;
+      document.addEventListener('mousemove', onDrag);
+      document.addEventListener('mouseup', stopDrag);
+      document.addEventListener('touchmove', onDrag, { passive: false });
+      document.addEventListener('touchend', stopDrag);
+      e.preventDefault();
+    }
+
+    function onDrag(e) {
+      if (!isDragging) return;
+      const point = e.touches ? e.touches[0] : e;
+      const dx = point.clientX - startX;
+      const dy = point.clientY - startY;
+      let newLeft = startLeft + dx;
+      let newTop = startTop + dy;
+      // Keep within viewport
+      newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - 60));
+      newTop = Math.max(0, Math.min(newTop, window.innerHeight - 60));
+      panel.style.left = newLeft + 'px';
+      panel.style.top = newTop + 'px';
+      e.preventDefault();
+    }
+
+    function stopDrag() {
+      isDragging = false;
+      panel.classList.remove('dragging');
+      document.removeEventListener('mousemove', onDrag);
+      document.removeEventListener('mouseup', stopDrag);
+      document.removeEventListener('touchmove', onDrag);
+      document.removeEventListener('touchend', stopDrag);
+    }
+  }
+
+  // Observe DOM for new floating panels and make them draggable
+  const floatObserver = new MutationObserver((mutations) => {
+    mutations.forEach(m => {
+      m.addedNodes.forEach(node => {
+        if (node.nodeType !== 1) return;
+        if (node.classList?.contains('tips-float')) makeDraggable(node, '.tf-title');
+        if (node.classList?.contains('lead-profile-float')) makeDraggable(node, '.lpf-title');
+      });
+    });
+  });
+  floatObserver.observe(document.body, { childList: true });
   navigateTo('phase1');
 
 })();
