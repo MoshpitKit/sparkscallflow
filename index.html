@@ -3826,6 +3826,11 @@ code {
   min-height: 18px;
 }
 
+.login-card input:-webkit-autofill {
+  animation-name: onAutoFill;
+}
+@keyframes onAutoFill { from {} to {} }
+
 .login-hidden {
   display: none !important;
 }
@@ -6843,10 +6848,25 @@ const REFERENCE_DATA = {
   loginNameInput.addEventListener('keyup', validateLoginInputs);
   loginEmailInput.addEventListener('keyup', validateLoginInputs);
 
-  // Handle browser autofill which doesn't fire input events
-  setTimeout(validateLoginInputs, 500);
-  setTimeout(validateLoginInputs, 1500);
-  setTimeout(validateLoginInputs, 3000);
+  // Handle browser autofill - detect via animationstart (Chrome autofill triggers this)
+  loginNameInput.addEventListener('animationstart', validateLoginInputs);
+  loginEmailInput.addEventListener('animationstart', validateLoginInputs);
+
+  // Also poll for autofill since some browsers don't fire any events
+  const autofillCheck = setInterval(() => {
+    // Check if fields have values (autofilled or typed)
+    const nameVal = loginNameInput.value || loginNameInput.innerText || '';
+    const emailVal = loginEmailInput.value || loginEmailInput.innerText || '';
+    if (nameVal.length >= 2 && emailVal.includes('@')) {
+      validateLoginInputs();
+      clearInterval(autofillCheck);
+    }
+  }, 200);
+  // Stop polling after 10 seconds
+  setTimeout(() => clearInterval(autofillCheck), 10000);
+
+  // Also validate on any click inside the login card
+  document.querySelector('.login-card').addEventListener('click', validateLoginInputs);
 
   loginNameInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') loginEmailInput.focus();
