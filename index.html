@@ -8908,12 +8908,6 @@ const REFERENCE_DATA = {
       document.removeEventListener('touchend', stopDrag);
     }
   }
-      document.removeEventListener('mousemove', onDrag);
-      document.removeEventListener('mouseup', stopDrag);
-      document.removeEventListener('touchmove', onDrag);
-      document.removeEventListener('touchend', stopDrag);
-    }
-  }
 
   // Observe DOM for new floating panels and make them draggable
   const floatObserver = new MutationObserver((mutations) => {
