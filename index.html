@@ -8814,20 +8814,34 @@ const REFERENCE_DATA = {
   function makeDraggable(panel, handleSelector) {
     const handle = panel.querySelector(handleSelector);
     if (!handle) return;
-    let isDragging = false, startX, startY, startLeft, startTop;
+    let isDragging = false, hasMoved = false, startX, startY, startLeft, startTop;
 
     handle.addEventListener('mousedown', startDrag);
     handle.addEventListener('touchstart', startDrag, { passive: false });
 
+    // Override the collapse click - only collapse if we didn't drag
+    const origClickHandlers = handle.onclick;
+    handle.addEventListener('click', (e) => {
+      if (hasMoved) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        hasMoved = false;
+      }
+    }, true); // capture phase so it runs before the collapse handler
+
     function startDrag(e) {
-      if (e.target.closest('.tf-toggle, .lpf-toggle')) return; // don't drag on collapse toggle
+      if (e.target.closest('.tf-toggle, .lpf-toggle, .wf-toggle')) return;
       isDragging = true;
-      panel.classList.add('dragging');
+      hasMoved = false;
       const rect = panel.getBoundingClientRect();
-      // Convert to left/top positioning
+      panel.style.position = 'fixed';
       panel.style.left = rect.left + 'px';
       panel.style.top = rect.top + 'px';
       panel.style.right = 'auto';
+      panel.style.bottom = 'auto';
+      panel.style.margin = '0';
+      panel.style.transition = 'none';
+      panel.style.zIndex = '9000';
       const point = e.touches ? e.touches[0] : e;
       startX = point.clientX;
       startY = point.clientY;
@@ -8845,11 +8859,11 @@ const REFERENCE_DATA = {
       const point = e.touches ? e.touches[0] : e;
       const dx = point.clientX - startX;
       const dy = point.clientY - startY;
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) hasMoved = true;
       let newLeft = startLeft + dx;
       let newTop = startTop + dy;
-      // Keep within viewport
       newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - 60));
-      newTop = Math.max(0, Math.min(newTop, window.innerHeight - 60));
+      newTop = Math.max(40, Math.min(newTop, window.innerHeight - 60));
       panel.style.left = newLeft + 'px';
       panel.style.top = newTop + 'px';
       e.preventDefault();
@@ -8857,7 +8871,14 @@ const REFERENCE_DATA = {
 
     function stopDrag() {
       isDragging = false;
-      panel.classList.remove('dragging');
+      panel.style.transition = '';
+      panel.style.zIndex = '';
+      document.removeEventListener('mousemove', onDrag);
+      document.removeEventListener('mouseup', stopDrag);
+      document.removeEventListener('touchmove', onDrag);
+      document.removeEventListener('touchend', stopDrag);
+    }
+  }
       document.removeEventListener('mousemove', onDrag);
       document.removeEventListener('mouseup', stopDrag);
       document.removeEventListener('touchmove', onDrag);
