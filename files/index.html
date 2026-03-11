@@ -3848,6 +3848,16 @@ code {
 </style>
 
   <script>
+  // Force clear old caches and SW on every load to prevent stale content
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(regs => {
+      regs.forEach(r => r.unregister());
+    });
+    caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
+  }
+  </script>
+
+  <script>
   // PWA manifest is loaded via <link> tag in <head>
 
   // PWA: Service Worker registration
@@ -4841,7 +4851,7 @@ const PHASES_DATA = {
           </div>
 
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
-            <div style="background:linear-gradient(135deg,#1e293b,#334155);border-radius:12px;padding:20px;color:#fff;cursor:pointer;" onclick="navigateTo('phase5-dhj59-p1')">
+            <div style="background:linear-gradient(135deg,#1e293b,#334155);border-radius:12px;padding:20px;color:#fff;cursor:pointer;" data-nav="phase5-dhj59-p1">
               <div style="font-size:24px;margin-bottom:8px;">🎯</div>
               <h4 style="color:#fff;margin-bottom:6px;">Path A: DHJ-First</h4>
               <p style="font-size:12px;color:rgba(255,255,255,0.78);margin-bottom:12px;">Lead with ForeverClean membership pitch directly.</p>
@@ -4852,7 +4862,7 @@ const PHASES_DATA = {
                 📺 TV Ads / Direct Mail
               </div>
             </div>
-            <div style="background:linear-gradient(135deg,#0d9488,#0f766e);border-radius:12px;padding:20px;color:#fff;cursor:pointer;" onclick="navigateTo('phase5-otc-p1')">
+            <div style="background:linear-gradient(135deg,#0d9488,#0f766e);border-radius:12px;padding:20px;color:#fff;cursor:pointer;" data-nav="phase5-otc-p1">
               <div style="font-size:24px;margin-bottom:8px;">🔄</div>
               <h4 style="color:#fff;margin-bottom:6px;">Path B: OTC-First (Conversion)</h4>
               <p style="font-size:12px;color:rgba(255,255,255,0.78);margin-bottom:12px;">Confirm OTC first, then steer toward ForeverClean.</p>
@@ -7644,6 +7654,7 @@ const REFERENCE_DATA = {
       el.classList.toggle('collapsed');
     });
     document.body.appendChild(el);
+    makeDraggable(el, '.lpf-title');
   }
 
   function renderFloatingTips(tips) {
@@ -7702,6 +7713,7 @@ const REFERENCE_DATA = {
         el.classList.toggle('collapsed');
       });
       document.body.appendChild(el);
+      makeDraggable(el, '.tf-title');
     }
 
     // --- RIGHT PANEL: Warnings ---
@@ -8753,6 +8765,15 @@ const REFERENCE_DATA = {
   function escapeAttr(str) {
     return str.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
+
+  // --- DATA-NAV CLICK DELEGATION ---
+  document.addEventListener('click', (e) => {
+    const navEl = e.target.closest('[data-nav]');
+    if (navEl) {
+      e.preventDefault();
+      navigateTo(navEl.dataset.nav);
+    }
+  });
 
   // --- KEYBOARD SHORTCUTS ---
   document.addEventListener('keydown', (e) => {
